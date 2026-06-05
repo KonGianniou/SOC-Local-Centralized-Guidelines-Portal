@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOC Guidelines Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue:    #25A0D5;
+    --blue-dk: #1a85b5;
+    --light:   #F0F5F8;
+    --dark:    #373939;
+    --dark2:   #2a2c2c;
+    --red:     #C51E2D;
+    --gray:    #8D8F91;
+    --gray-lt: #b0b2b4;
+    --red2:    #D8202D;
+    --offwhite:#E9E6EB;
+    --red3:    #E93945;
+    --white:   #ffffff;
+    --border:  rgba(55,57,57,0.12);
+    --border2: rgba(55,57,57,0.22);
+  }
+
+  html, body {
+    height: 100%;
+    background: #1a1c1c;
+    color: var(--offwhite);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+  }
+
+  .shell { min-height: 100vh; display: flex; flex-direction: column; }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--dark);
+    border-bottom: 3px solid var(--blue);
+    padding: 0 32px;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 14px; }
+
+  .logo-badge {
+    width: 36px; height: 36px;
+    background: var(--blue);
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .logo-badge i { font-size: 19px; color: var(--white); }
+
+  .header-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .header-title span { color: var(--blue); }
+
+  .divider-v {
+    width: 1px; height: 22px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 4px;
+  }
+
+  .header-sub {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .header-right { display: flex; align-items: center; gap: 20px; }
+
+  .copyright-pill {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .status-pill {
+    display: flex; align-items: center; gap: 7px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .status-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #2ecc71;
+    box-shadow: 0 0 0 2px rgba(46,204,113,0.25);
+    animation: blink 2.4s ease-in-out infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+  #live-clock {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    min-width: 76px;
+    text-align: right;
+  }
+
+  /* ── INFO BAR ── */
+  .info-bar {
+    background: var(--dark2);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0 32px;
+    height: 36px;
+    display: flex; align-items: center; gap: 28px;
+    flex-shrink: 0;
+  }
+  .info-item {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .info-item i { font-size: 13px; color: var(--gray-lt); }
+  .info-item strong { color: var(--offwhite); }
+  .bar-sep { width: 1px; height: 14px; background: rgba(255,255,255,0.08); }
+
+  /* ── MAIN GRID ── */
+  main {
+    flex: 1;
+    padding: 22px 28px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 18px;
+  }
+
+  /* ── SECTION PANEL ── */
+  .panel {
+    background: #232525;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* top accent */
+  .p-s1 { border-top: 3px solid var(--red); }
+  .p-s2 { border-top: 3px solid var(--blue); }
+  .p-s3 { border-top: 3px solid var(--blue); }
+  .p-s4 { border-top: 3px solid var(--red3); }
+
+  .panel-head {
+    background: #2e3030;
+    padding: 12px 18px 11px;
+    display: flex; align-items: center; gap: 11px;
+    flex-shrink: 0;
+  }
+
+  .panel-icon {
+    width: 32px; height: 32px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .p-s1 .panel-icon { background: rgba(197,30,45,0.2); }
+  .p-s2 .panel-icon { background: rgba(37,160,213,0.2); }
+  .p-s3 .panel-icon { background: rgba(37,160,213,0.2); }
+  .p-s4 .panel-icon { background: rgba(233,57,69,0.2); }
+
+  .p-s1 .panel-icon i { color: var(--red3); font-size: 16px; }
+  .p-s2 .panel-icon i { color: var(--blue); font-size: 16px; }
+  .p-s3 .panel-icon i { color: var(--blue); font-size: 16px; }
+  .p-s4 .panel-icon i { color: var(--red3); font-size: 16px; }
+
+  .panel-meta { flex: 1; }
+  .panel-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+  .p-s1 .panel-num { color: rgba(233,57,69,0.7); }
+  .p-s2 .panel-num { color: rgba(37,160,213,0.7); }
+  .p-s3 .panel-num { color: rgba(37,160,213,0.7); }
+  .p-s4 .panel-num { color: rgba(233,57,69,0.6); }
+
+  .panel-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .doc-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gray);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    padding: 2px 7px;
+  }
+
+  /* ── DOC LIST ── */
+  .doc-list { flex: 1; overflow-y: auto; }
+  .doc-list::-webkit-scrollbar { width: 3px; }
+  .doc-list::-webkit-scrollbar-track { background: transparent; }
+  .doc-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .doc-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.12s;
+    border-left: 3px solid transparent;
+  }
+  .doc-row:last-child { border-bottom: none; }
+
+  .doc-row:hover { background: rgba(255,255,255,0.05); }
+  .p-s1 .doc-row:hover { border-left-color: var(--red); }
+  .p-s2 .doc-row:hover { border-left-color: var(--blue); }
+  .p-s3 .doc-row:hover { border-left-color: var(--blue); }
+  .p-s4 .doc-row:hover { border-left-color: var(--red3); }
+
+  .doc-row:hover .doc-arrow { opacity: 1; transform: translateX(0); }
+  .doc-row:hover .doc-label { color: var(--offwhite); }
+
+  .doc-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gray-lt);
+    min-width: 20px;
+    flex-shrink: 0;
+  }
+
+  .doc-pdf-icon {
+    width: 24px; height: 24px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .p-s1 .doc-pdf-icon i { color: var(--red); font-size: 12px; }
+  .p-s2 .doc-pdf-icon i { color: var(--blue); font-size: 12px; }
+  .p-s3 .doc-pdf-icon i { color: var(--blue); font-size: 12px; }
+  .p-s4 .doc-pdf-icon i { color: var(--red3); font-size: 12px; }
+
+  .doc-label {
+    flex: 1;
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #b8babb;
+    line-height: 1.2;
+  }
+
+  .doc-arrow {
+    font-size: 13px;
+    color: var(--gray-lt);
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity 0.12s, transform 0.12s;
+    flex-shrink: 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 2px solid var(--blue);
+    padding: 0 32px;
+    height: 36px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .foot-l {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .foot-r {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--gray);
+    letter-spacing: 0.05em;
+  }
+  .foot-r span { color: var(--blue); }
+
+  /* ── NAME BAR ── */
+  .name-bar {
+    background: rgba(37,160,213,0.12);
+    border-top: 1px solid rgba(37,160,213,0.35);
+    padding: 0 32px;
+    height: 28px;
+    display: flex; align-items: center; justify-content: flex-end;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--blue);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <div class="logo-badge"><i class="ti ti-shield-lock" aria-hidden="true"></i></div>
+      <div class="header-title"><span>SOC</span> — Guidelines Portal</div>
+      <div class="divider-v"></div>
+      <div class="header-sub">Security Operations Center</div>
+    </div>
+    <div class="header-right">
+      <div class="status-pill"><div class="status-dot"></div>All Systems Operational</div>
+      <div class="divider-v"></div>
+      <div class="copyright-pill">&copy; Konstantina Gianniou</div>
+      <div id="live-clock">00:00:00</div>
+    </div>
+  </header>
+
+  <!-- INFO BAR -->
+  <div class="info-bar">
+    <div class="info-item"><i class="ti ti-folders" aria-hidden="true"></i><strong>40</strong>&nbsp;Documents</div>
+    <div class="bar-sep"></div>
+    <div class="info-item"><i class="ti ti-layout-grid" aria-hidden="true"></i><strong>4</strong>&nbsp;Sections</div>
+    <div class="bar-sep"></div>
+    <div class="info-item"><i class="ti ti-file-type-pdf" aria-hidden="true"></i>All guidelines in PDF format</div>
+    <div class="bar-sep"></div>
+    <div class="info-item"><i class="ti ti-click" aria-hidden="true"></i>Click any title to open its guideline</div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <main>
+
+    <!-- S1: Signals & Procedures -->
+    <div class="panel p-s1">
+      <div class="panel-head">
+        <div class="panel-icon"><i class="ti ti-radar" aria-hidden="true"></i></div>
+        <div class="panel-meta">
+          <div class="panel-num">Section 01</div>
+          <div class="panel-title">Type of Signals &amp; Procedures</div>
+        </div>
+        <div class="doc-badge">10 docs</div>
+      </div>
+      <div class="doc-list">
+        <a class="doc-row" href="pdfs/s1_01_intrusion_detection_signals.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">01</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Intrusion Detection Signals</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_02_malware_alert_classification.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">02</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Malware Alert Classification</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_03_network_anomaly_procedures.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">03</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Network Anomaly Procedures</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_04_phishing_signal_response.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">04</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Phishing Signal Response</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_05_ddos_alert_handling.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">05</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">DDoS Alert Handling</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_06_endpoint_threat_signals.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">06</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Endpoint Threat Signals</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_07_privilege_escalation_alerts.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">07</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Privilege Escalation Alerts</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_08_data_exfiltration_signals.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">08</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Data Exfiltration Signals</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_09_false_positive_triage.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">09</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">False Positive Triage</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s1_10_signal_escalation_matrix.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">10</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Signal Escalation Matrix</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- S2: Incoming Calls -->
+    <div class="panel p-s2">
+      <div class="panel-head">
+        <div class="panel-icon"><i class="ti ti-phone-incoming" aria-hidden="true"></i></div>
+        <div class="panel-meta">
+          <div class="panel-num">Section 02</div>
+          <div class="panel-title">Incoming Calls Procedures</div>
+        </div>
+        <div class="doc-badge">10 docs</div>
+      </div>
+      <div class="doc-list">
+        <a class="doc-row" href="pdfs/s2_01_call_intake_protocol.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">01</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Call Intake Protocol</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_02_caller_verification_procedure.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">02</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Caller Verification Procedure</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_03_incident_report_via_call.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">03</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Incident Report via Call</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_04_priority_call_routing.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">04</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Priority Call Routing</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_05_social_engineering_call_handling.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">05</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Social Engineering Call Handling</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_06_escalation_to_tier_2_analyst.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">06</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Escalation to Tier 2 Analyst</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_07_after-hours_call_protocol.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">07</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">After-Hours Call Protocol</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_08_call_logging_requirements.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">08</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Call Logging Requirements</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_09_executive_communication_script.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">09</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Executive Communication Script</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s2_10_call_closure_checklist.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">10</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Call Closure Checklist</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- S3: Software Procedures -->
+    <div class="panel p-s3">
+      <div class="panel-head">
+        <div class="panel-icon"><i class="ti ti-terminal-2" aria-hidden="true"></i></div>
+        <div class="panel-meta">
+          <div class="panel-num">Section 03</div>
+          <div class="panel-title">Software Procedures</div>
+        </div>
+        <div class="doc-badge">10 docs</div>
+      </div>
+      <div class="doc-list">
+        <a class="doc-row" href="pdfs/s3_01_siem_platform_user_guide.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">01</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">SIEM Platform User Guide</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_02_ticketing_system_workflow.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">02</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Ticketing System Workflow</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_03_threat_intelligence_platform.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">03</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Threat Intelligence Platform</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_04_edr_tool_operations.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">04</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">EDR Tool Operations</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_05_firewall_management_procedures.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">05</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Firewall Management Procedures</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_06_vulnerability_scanner_usage.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">06</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Vulnerability Scanner Usage</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_07_log_management_procedures.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">07</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Log Management Procedures</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_08_soar_playbook_execution.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">08</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">SOAR Playbook Execution</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_09_vpn_access_monitoring.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">09</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">VPN Access Monitoring</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s3_10_tool_access_and_credentials_policy.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">10</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Tool Access &amp; Credentials Policy</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- S4: General Info -->
+    <div class="panel p-s4">
+      <div class="panel-head">
+        <div class="panel-icon"><i class="ti ti-info-hexagon" aria-hidden="true"></i></div>
+        <div class="panel-meta">
+          <div class="panel-num">Section 04</div>
+          <div class="panel-title">General Info</div>
+        </div>
+        <div class="doc-badge">10 docs</div>
+      </div>
+      <div class="doc-list">
+        <a class="doc-row" href="pdfs/s4_01_soc_organizational_structure.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">01</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">SOC Organizational Structure</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_02_shift_handover_protocol.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">02</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Shift Handover Protocol</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_03_incident_severity_level_definitions.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">03</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Incident Severity Level Definitions</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_04_contact_directory_and_on-call_list.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">04</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Contact Directory &amp; On-Call List</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_05_compliance_and_regulatory_reference.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">05</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Compliance &amp; Regulatory Reference</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_06_data_handling_policy.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">06</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Data Handling Policy</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_07_analyst_training_resources.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">07</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Analyst Training Resources</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_08_reporting_templates.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">08</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Reporting Templates</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_09_business_continuity_plan.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">09</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Business Continuity Plan</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+        <a class="doc-row" href="pdfs/s4_10_glossary_of_terms.pdf" target="_blank" rel="noopener">
+          <span class="doc-num">10</span><div class="doc-pdf-icon"><i class="ti ti-file-type-pdf" aria-hidden="true"></i></div>
+          <span class="doc-label">Glossary of Terms</span><i class="ti ti-arrow-right doc-arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="foot-l">Security Operations Center &mdash; Internal Use Only &mdash; Confidential</div>
+    <div class="foot-r">Guidelines Portal &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; <span>40 Documents</span></div>
+  </footer>
+  <div class="name-bar">Konstantina Gianniou</div>
+
+</div>
+<script>
+  function tick(){
+    const n=new Date(), p=x=>String(x).padStart(2,'0');
+    document.getElementById('live-clock').textContent=p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());
+  }
+  tick(); setInterval(tick,1000);
+</script>
+</body>
+</html>
