@@ -26,14 +26,36 @@
     --white:   #ffffff;
     --border:  rgba(55,57,57,0.12);
     --border2: rgba(55,57,57,0.22);
+
+    /* theme-aware surface tokens (light defaults) */
+    --page-bg:      var(--light);
+    --text-color:   var(--dark);
+    --panel-bg:     var(--white);
+    --panel-border: var(--border2);
+    --row-border:   var(--border);
+    --icon-bg:      var(--offwhite);
+    --doc-label:    #444;
+    --scrollbar:    var(--border2);
+  }
+
+  body.dark-mode {
+    --page-bg:      #15171a;
+    --text-color:   #e7e9ea;
+    --panel-bg:     #1d2024;
+    --panel-border: rgba(255,255,255,0.14);
+    --row-border:   rgba(255,255,255,0.08);
+    --icon-bg:      #2a2d31;
+    --doc-label:    #c7c9cb;
+    --scrollbar:    rgba(255,255,255,0.16);
   }
 
   html, body {
     height: 100%;
-    background: #1a1c1c;
-    color: var(--offwhite);
+    background: var(--page-bg);
+    color: var(--text-color);
     font-family: 'Barlow', sans-serif;
     font-size: 14px;
+    transition: background 0.2s ease, color 0.2s ease;
   }
 
   .shell { min-height: 100vh; display: flex; flex-direction: column; }
@@ -85,14 +107,6 @@
   }
 
   .header-right { display: flex; align-items: center; gap: 20px; }
-
-  .copyright-pill {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--gray);
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-  }
 
   .status-pill {
     display: flex; align-items: center; gap: 7px;
@@ -152,21 +166,22 @@
 
   /* ── SECTION PANEL ── */
   .panel {
-    background: #232525;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
     border-radius: 6px;
     display: flex; flex-direction: column;
     overflow: hidden;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
 
   /* top accent */
   .p-s1 { border-top: 3px solid var(--red); }
   .p-s2 { border-top: 3px solid var(--blue); }
-  .p-s3 { border-top: 3px solid var(--blue); }
-  .p-s4 { border-top: 3px solid var(--red3); }
+  .p-s3 { border-top: 3px solid var(--dark); }
+  .p-s4 { border-top: 3px solid var(--gray); }
 
   .panel-head {
-    background: #2e3030;
+    background: var(--dark);
     padding: 12px 18px 11px;
     display: flex; align-items: center; gap: 11px;
     flex-shrink: 0;
@@ -180,13 +195,13 @@
   }
   .p-s1 .panel-icon { background: rgba(197,30,45,0.2); }
   .p-s2 .panel-icon { background: rgba(37,160,213,0.2); }
-  .p-s3 .panel-icon { background: rgba(37,160,213,0.2); }
-  .p-s4 .panel-icon { background: rgba(233,57,69,0.2); }
+  .p-s3 .panel-icon { background: rgba(255,255,255,0.1); }
+  .p-s4 .panel-icon { background: rgba(141,143,145,0.25); }
 
   .p-s1 .panel-icon i { color: var(--red3); font-size: 16px; }
   .p-s2 .panel-icon i { color: var(--blue); font-size: 16px; }
-  .p-s3 .panel-icon i { color: var(--blue); font-size: 16px; }
-  .p-s4 .panel-icon i { color: var(--red3); font-size: 16px; }
+  .p-s3 .panel-icon i { color: var(--offwhite); font-size: 16px; }
+  .p-s4 .panel-icon i { color: var(--gray-lt); font-size: 16px; }
 
   .panel-meta { flex: 1; }
   .panel-num {
@@ -198,8 +213,8 @@
   }
   .p-s1 .panel-num { color: rgba(233,57,69,0.7); }
   .p-s2 .panel-num { color: rgba(37,160,213,0.7); }
-  .p-s3 .panel-num { color: rgba(37,160,213,0.7); }
-  .p-s4 .panel-num { color: rgba(233,57,69,0.6); }
+  .p-s3 .panel-num { color: rgba(233,230,235,0.5); }
+  .p-s4 .panel-num { color: rgba(141,143,145,0.8); }
 
   .panel-title {
     font-family: 'Barlow Condensed', sans-serif;
@@ -224,12 +239,12 @@
   .doc-list { flex: 1; overflow-y: auto; }
   .doc-list::-webkit-scrollbar { width: 3px; }
   .doc-list::-webkit-scrollbar-track { background: transparent; }
-  .doc-list::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  .doc-list::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 2px; }
 
   .doc-row {
     display: flex; align-items: center; gap: 10px;
     padding: 8px 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid var(--row-border);
     cursor: pointer;
     text-decoration: none;
     color: inherit;
@@ -238,14 +253,14 @@
   }
   .doc-row:last-child { border-bottom: none; }
 
-  .doc-row:hover { background: rgba(255,255,255,0.05); }
+  .doc-row:hover { background: var(--page-bg); }
   .p-s1 .doc-row:hover { border-left-color: var(--red); }
   .p-s2 .doc-row:hover { border-left-color: var(--blue); }
-  .p-s3 .doc-row:hover { border-left-color: var(--blue); }
-  .p-s4 .doc-row:hover { border-left-color: var(--red3); }
+  .p-s3 .doc-row:hover { border-left-color: var(--dark); }
+  .p-s4 .doc-row:hover { border-left-color: var(--gray); }
 
   .doc-row:hover .doc-arrow { opacity: 1; transform: translateX(0); }
-  .doc-row:hover .doc-label { color: var(--offwhite); }
+  .doc-row:hover .doc-label { color: var(--text-color); }
 
   .doc-num {
     font-family: 'Share Tech Mono', monospace;
@@ -258,22 +273,24 @@
   .doc-pdf-icon {
     width: 24px; height: 24px;
     border-radius: 3px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--panel-border);
+    background: var(--icon-bg);
     display: flex; align-items: center; justify-content: center;
     flex-shrink: 0;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
   .p-s1 .doc-pdf-icon i { color: var(--red); font-size: 12px; }
   .p-s2 .doc-pdf-icon i { color: var(--blue); font-size: 12px; }
-  .p-s3 .doc-pdf-icon i { color: var(--blue); font-size: 12px; }
-  .p-s4 .doc-pdf-icon i { color: var(--red3); font-size: 12px; }
+  .p-s3 .doc-pdf-icon i { color: var(--dark); font-size: 12px; }
+  .p-s4 .doc-pdf-icon i { color: var(--gray); font-size: 12px; }
 
   .doc-label {
     flex: 1;
     font-size: 12.5px;
     font-weight: 400;
-    color: #b8babb;
+    color: var(--doc-label);
     line-height: 1.2;
+    transition: color 0.2s ease;
   }
 
   .doc-arrow {
@@ -309,20 +326,20 @@
   }
   .foot-r span { color: var(--blue); }
 
-  /* ── NAME BAR ── */
-  .name-bar {
-    background: rgba(37,160,213,0.12);
-    border-top: 1px solid rgba(37,160,213,0.35);
-    padding: 0 32px;
-    height: 28px;
-    display: flex; align-items: center; justify-content: flex-end;
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 10px;
-    color: var(--blue);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 30px;
+    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    color: var(--gray-lt);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
     flex-shrink: 0;
   }
+  .theme-toggle:hover { background: rgba(255,255,255,0.12); color: var(--white); }
+  .theme-toggle i { font-size: 15px; }
 </style>
 </head>
 <body>
@@ -338,9 +355,10 @@
     </div>
     <div class="header-right">
       <div class="status-pill"><div class="status-dot"></div>All Systems Operational</div>
-      <div class="divider-v"></div>
-      <div class="copyright-pill">&copy; Konstantina Gianniou</div>
       <div id="live-clock">00:00:00</div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+        <i class="ti ti-moon" aria-hidden="true"></i>
+      </button>
     </div>
   </header>
 
@@ -581,7 +599,6 @@
     <div class="foot-l">Security Operations Center &mdash; Internal Use Only &mdash; Confidential</div>
     <div class="foot-r">Guidelines Portal &nbsp;·&nbsp; v1.0 &nbsp;·&nbsp; <span>40 Documents</span></div>
   </footer>
-  <div class="name-bar">Konstantina Gianniou</div>
 
 </div>
 <script>
@@ -590,6 +607,26 @@
     document.getElementById('live-clock').textContent=p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());
   }
   tick(); setInterval(tick,1000);
+
+  // ── THEME TOGGLE ──
+  (function(){
+    const toggleBtn = document.getElementById('theme-toggle');
+    const icon = toggleBtn.querySelector('i');
+
+    function applyTheme(isDark){
+      document.body.classList.toggle('dark-mode', isDark);
+      icon.className = isDark ? 'ti ti-sun' : 'ti ti-moon';
+      toggleBtn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    // Default to the visitor's OS-level preference on first load.
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark);
+
+    toggleBtn.addEventListener('click', function(){
+      applyTheme(!document.body.classList.contains('dark-mode'));
+    });
+  })();
 </script>
 </body>
 </html>
