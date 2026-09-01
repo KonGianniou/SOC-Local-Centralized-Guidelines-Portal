@@ -48,7 +48,7 @@ The portal organizes **40 guidelines** across four operational sections, each co
 ## Features
 
 * **Single-file architecture** — the entire portal is self-contained in one `index.html` file with all CSS and JavaScript inline; no build tools, no frameworks, no server required
-* **Dark UI** — purpose-built for shift work in low-light environments, reducing eye strain across extended operational hours
+* **Option for Dark UI (Dark mode)** — purpose-built for shift work in low-light environments, reducing eye strain across extended operational hours
 * **Per-section colour coding** — each of the four panels has a distinct accent colour applied consistently to its top border, icons, section label, PDF markers, and hover interactions, making it fast to visually locate the right section
 * **Live clock** — real-time display updated every second, matching the temporal awareness expected in an active operations environment
 * **Animated system status indicator** — a pulsing green dot signals that the portal is live and operational
