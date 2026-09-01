@@ -50,8 +50,8 @@ The portal organizes **40 guidelines** across four operational sections, each co
 * **Single-file architecture** — the entire portal is self-contained in one `index.html` file with all CSS and JavaScript inline; no build tools, no frameworks, no server required
 * **Option for Dark UI (Dark mode)** — purpose-built for shift work in low-light environments, reducing eye strain across extended operational hours
 
-  \--- <img width="421" height="52" alt="image" src="https://github.com/user-attachments/assets/bede8f9b-db07-48e4-93e9-28da5ca89813" />
-  \--- <img width="410" height="46" alt="image" src="https://github.com/user-attachments/assets/75e219b8-5a96-42bf-8429-11593075c983" />
+  \--- <img width="421" height="52" alt="image" src="https://github.com/user-attachments/assets/bede8f9b-db07-48e4-93e9-28da5ca89813" />  \---
+  \--- <img width="410" height="46" alt="image" src="https://github.com/user-attachments/assets/75e219b8-5a96-42bf-8429-11593075c983" />  \---
 
 
 * **Per-section colour coding** — each of the four panels has a distinct accent colour applied consistently to its top border, icons, section label, PDF markers, and hover interactions, making it fast to visually locate the right section
