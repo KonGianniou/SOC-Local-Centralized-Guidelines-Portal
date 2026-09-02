@@ -4,27 +4,29 @@
 
 \---
 
-## Project Background
+## Why I built this
 
-As part of managing a Security Operations Center (SOC), one of the most persistent day-to-day challenges is **information fragmentation** — agents arriving for a shift having to hunt across shared drives, email threads, or physical binders to find the procedure they need, often under time pressure when an alert is already active.
+Managing a SOC, one of the more annoying day-to-day problems is information fragmentation with agents starting a shift and having to dig through shared drives, old email threads, or a physical binder to find the procedure they need, usually while an alert is already active.
 
-I designed and built this project to solve that problem directly. The **Internal Knowledge Base** is a centralized, locally-hosted guidelines portal created so that my agents always have a single, reliable place to go during a shift. Whether they need to verify a call intake procedure, look up the correct escalation path for a Tier 2 incident, or check which SIEM playbook applies to a given alert type — it is all one click away, structured, and always available.
+I built this to fix that for my own team. It's a centralized, locally-hosted guidelines portal so agents have one place to go during a shift instead of hunting around. Need the call intake steps? The escalation path for a Tier 2 incident? Which guideline applies to an alert type? It's one click away.
 
-The goal was not just to organize documents, but to create a tool that feels native to the operational environment: a dark interface that is easy on the eyes during long shifts, clear visual section separation so agents can orient quickly under pressure, and a live status indicator that reinforces that the portal is active and ready.
+
+I wanted it to feel like it belongs in the operational environment it's used in with a dark interface for long shifts and clear separation between sections so people can find things fast under pressure.
 
 \---
 
 ## The Business Problem It Solves
 
-In a SOC environment, speed and accuracy during an incident are directly tied to how quickly an analyst can locate and apply the correct procedure. When guidelines are scattered or inaccessible, agents improvise — and improvisation in security operations introduces risk.
+In a SOC, how fast you can find and apply the right procedure matters. When guidelines are scattered, people start improvising, and improvisation in security ops is where things go wrong.
 
-This portal addresses that by:
 
-* **Centralizing all operational documentation** into one access point, eliminating the need to search across multiple locations
-* **Organizing guidelines by operational function** so agents know exactly where to look depending on what they are dealing with — whether it is a signal, an incoming call, a software tool, or a general policy question
-* **Being locally hostable** with no internet dependency, meaning it remains accessible even in network-restricted or isolated environments
-* **Requiring zero training to use** — the interface is self-explanatory, fast to scan, and consistent in its layout so new agents can navigate it from day one
-* **Supporting shift continuity** by ensuring the same information is available to every analyst regardless of shift, seniority, or location
+This tries to fix that by:
+
+* Putting all the documentation in one place instead of several
+* Organizing guidelines by what an agent is actually dealing with: a signal, an incoming call, a tool, or a policy question
+* Running locally with no internet dependency, so it still works on isolated or network-restricted machines
+* Being easy enough to use with zero onboarding — new agents shouldn't need a walkthrough
+* Keeping the same info available to every shift, regardless of who's on or where they're working from
 
 \---
 
@@ -32,16 +34,17 @@ This portal addresses that by:
   <img width="1890" height="681" alt="image" src="https://github.com/user-attachments/assets/f098179d-d208-4c9a-9a02-f9a14f058d68" />
 
 
-## What the Portal Contains
+## What's in it
 
-The portal organizes **40 guidelines** across four operational sections, each colour-coded for fast identification:
+40 guidelines split across four sections, each with its own accent colour so they're easy to tell apart at a glance:
 
-|Section|Accent Colour|What It Covers|
-|-|-|-|
-|01 — Type of Signals \& Procedures|Red `#C51E2D`|How to identify, classify and respond to security signals including intrusion detection, malware alerts, DDoS, phishing, privilege escalation, data exfiltration, and false positive triage|
-|02 — Incoming Calls Procedures|Blue `#25A0D5`|Full call-handling workflow from intake and caller verification through to escalation, executive communication, logging, and call closure|
-|03 — Software Procedures|Blue `#25A0D5`|Operational use of SOC tooling — SIEM platform, ticketing system, threat intelligence platform, EDR, firewall management, vulnerability scanner, log management, SOAR playbooks, and VPN monitoring|
-|04 — General Info|Red `#E93945`|Organizational reference material — SOC structure, shift handover protocol, incident severity definitions, on-call directory, compliance references, data handling policy, training resources, reporting templates, and business continuity|
+| Section | Accent Colour | Covers |
+|---|---|---|
+| 01 — Type of Signals & Procedures | Red `#C51E2D` | Identifying, classifying and responding to signals — intrusion detection, malware alerts, DDoS, phishing, privilege escalation, data exfiltration, false positive triage |
+| 02 — Incoming Calls Procedures | Blue `#25A0D5` | Call handling end-to-end: intake, caller verification, escalation, executive comms, logging, closure |
+| 03 — Software Procedures | Blue `#25A0D5` | Using the SOC tooling — SIEM, ticketing, threat intel platform, EDR, firewall management, vulnerability scanner, log management, SOAR playbooks, VPN monitoring |
+| 04 — General Info | Red `#E93945` | SOC structure, shift handover, incident severity definitions, on-call directory, compliance references, data handling policy, training resources, reporting templates, business continuity |
+
 
 \---
 
@@ -53,12 +56,13 @@ The portal organizes **40 guidelines** across four operational sections, each co
   <img width="421" height="52" alt="image" src="https://github.com/user-attachments/assets/bede8f9b-db07-48e4-93e9-28da5ca89813" />  <img width="410" height="46" alt="image" src="https://github.com/user-attachments/assets/75e219b8-5a96-42bf-8429-11593075c983" />  
 
 
-* **Per-section colour coding** — each of the four panels has a distinct accent colour applied consistently to its top border, icons, section label, PDF markers, and hover interactions, making it fast to visually locate the right section
-* **Live clock** — real-time display updated every second, matching the temporal awareness expected in an active operations environment
-* **Animated system status indicator** — a pulsing green dot signals that the portal is live and operational
-* **Hover interactions** — document rows reveal a colour-matched directional arrow and border accent on hover, providing clear interactive feedback
-* **Scrollable panels** — each section panel scrolls independently with a slim custom scrollbar styled to match the dark theme
-* **PDF links** — every document row links directly to its corresponding PDF, opening in a new tab without navigating away from the portal
+* **Colour-coded sections** — each panel's accent colour carries through its border, icons, label, PDF markers, and hover states, so you can find the right section without reading anything
+* **Live clock** — updates every second
+* **Status indicator** — pulsing green dot to show the portal's live
+* **Hover feedback** — document rows show a colour-matched arrow and border accent on hover
+* **Independent scrolling panels** — each section scrolls on its own, with a slim scrollbar matching the theme
+* **PDF links** — every row opens its PDF in a new tab, no navigating away from the portal
+
 
 \---
 
@@ -72,7 +76,7 @@ The portal organizes **40 guidelines** across four operational sections, each co
 |Icons|[Tabler Icons](https://tabler.io/icons) via CDN webfont|
 |Fonts|[Google Fonts](https://fonts.google.com) — Barlow, Barlow Condensed, Share Tech Mono|
 
-No npm. No build step. No framework. Intentionally lightweight so it can run on any machine, intranet server, or static host without setup overhead.
+No npm, no build step, no framework. It runs on basically any machine, intranet server, or static host with zero setup.
 
 \---
 
@@ -105,15 +109,7 @@ internal-knowledge-base/
 
 \---
 
-## Design Rationale
 
-The dark theme is a deliberate operational choice, not an aesthetic one. SOC analysts work long shifts, often in low-light rooms with multiple monitors. A bright white interface adds unnecessary visual fatigue. The dark palette keeps contrast high where it matters — on the document titles and section labels — while keeping backgrounds recessive.
-
-Colour coding by section serves a functional purpose: under the pressure of an active incident, an analyst should be able to glance at the portal and immediately know which quadrant to reach for. The consistent application of each accent colour across every element of a panel — border, icon, label, hover state — reinforces that mapping without requiring the analyst to read anything first.
-
-The decision to keep all interactivity CSS-driven (except the clock) means the portal loads instantly, works without JavaScript enabled for all core navigation, and has no external dependencies that could fail during a network issue.
-
-\---
 
 ## License \& Copyright
 
